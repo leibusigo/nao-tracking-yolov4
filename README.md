@@ -1,12 +1,12 @@
 # 基于nao机器人实现yolov4目标检测并进行跟踪
 
-# **以下内容待更新**   
-
 ## Introduction - 介绍
+&emsp;&emsp;本项目为yolov4算法在nao机器人上的应用。<br>
+&emsp;&emsp;下图为目标跟踪流程图。由于nao机器人sdk库naoqi仅支持py2.7环境,本项目需分别运行py2.7环境下的"封装跟踪.py"文件和py3.6环境下的"predict.py"文件。<br>
+&emsp;&emsp;该项目可以让nao机器人转头寻找水瓶目标，检测到目标后通过单目测距向目标前进，当目标距离和nao小于1.09m时，程序完成运行。
+![image](https://github.com/leibusigo/nao-tracking-yolov4/blob/main/img/nao%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%B7%9F%E8%B8%AA%E6%B5%81%E7%A8%8B.png)
 
-### Summary - 概要
-
-### Features - 特性
+# **以下内容待更新** 
 
 ## Requirements - 必要条件（环境，对所有项目，和所有子模块和库的描述。）
 
@@ -16,18 +16,9 @@
 
 ## Usage - 用法（用法。）
 
-## Development - 开发（关于怎样开发的文档信息。（API 等。））
-
 ## Changelog - 更新日志（一个简短的历史记录（更改，替换或者其他）。）
-
-## FAQ - 常见问题（常见问题。）
 
 ## Support - 支持
 
-### Dos - 文档（更多文档。）
-
-### Contact - 联系（其他联系信息（电子邮件地址，网站，公司名称，地址等）。提交bug，功能要求，提交补丁，加入邮件列表，得到通知，或加入用户或开发开发区群的介绍。）
-
-## Authors and acknowledgment - 贡献者和感谢（作者列表和鸣谢。）
-
-## License - 版权信息（版权和许可信息（或阅读许可证）、法律声明。）
+## License - 版权信息
+&emsp;&emsp;本项目证书为GPL-3.0 License，详见[GPL-3.0 License.md](https://github.com/leibusigo/nao-tracking-yolov4/blob/main/LICENSE)
