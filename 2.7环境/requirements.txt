@@ -1,0 +1,4 @@
+numpy==1.16.6+vanilla
+opencv-python==2.4.13.7
+Pillow==6.2.2
+pynaoqi==2.1.4.13
