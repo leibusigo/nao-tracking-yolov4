@@ -11,7 +11,7 @@ nao机器人单目测距方法请参考：https://wenku.baidu.com/view/bdc7eea74
 下图为目标跟踪流程图。由于nao机器人sdk库naoqi仅支持py2.7环境,本项目需分别运行py2.7环境下的"封装跟踪.py"文件和py3.6环境下的"predict.py"文件。<br>
 该项目可以让nao机器人转头寻找水瓶目标，检测到目标后通过单目测距向目标前进，当目标距离和nao小于1.09m时，程序完成运行。
 ![image](https://github.com/leibusigo/nao-tracking-yolov4/blob/main/img/nao%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%B7%9F%E8%B8%AA%E6%B5%81%E7%A8%8B.png)
-## Requirements - 必要条件（环境，对所有项目，和所有子模块和库的描述。）
+## Requirements - 必要条件
 ### **py2.7环境**<br>
 numpy==1.16.6+vanilla<br>
 opencv-python==2.4.13.7<br>
