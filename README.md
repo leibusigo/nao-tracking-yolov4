@@ -21,7 +21,8 @@ pynaoqi==2.1.4.13<br>
 **naoqi库为软银官方提供的nao机器人sdk<br>naoqi库百度云链接：链接: https://pan.baidu.com/s/1kib-Bx9BjiOXCjrIycsIAw 提取码: 5k8b**
 ***
 ### **py3.6环境**<br>
-pytorch和cuda版本参考Bubbliiiing博文，其他缺少环境任意版本即可。
+torch==1.2.0 <br>
+cuda>=10.0.0<br>
 参考环境见[py3.6环境文件](https://github.com/leibusigo/nao-tracking-yolov4/blob/main/3.6%E7%8E%AF%E5%A2%83/requirements.txt)(**仅供参考，因为包含了很多自用无关的库**)
 ## Configuration - 配置
 **使用本项目前请先下载复现YOLOv4代码，并用py3.6文件夹中.py文件替换原文件中的同名文件<br>
