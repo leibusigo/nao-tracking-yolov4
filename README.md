@@ -1,5 +1,4 @@
 # 基于nao机器人实现yolov4目标检测并进行跟踪
-一点小修改
 ## Introduction - 介绍
 本项目为yolov4算法在nao机器人上的应用。<br><br>
 **关于YOLOv4原理请参考[YOLOv4原论文](https://arxiv.org/pdf/2004.10934.pdf)<br>
