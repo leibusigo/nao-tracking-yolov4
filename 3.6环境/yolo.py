@@ -120,6 +120,16 @@ class YOLO(object):
     #   加了一个flag形参，代表是否检测到物品并返回
     #---------------------------------------------------#
     def detect_image(self, image, flag):
+        top = 0
+        bottom = 0
+        left = 0
+        right = 0
+        all_top = []
+        all_bottom = []
+        all_left = []
+        all_right = []
+
+
         image_shape = np.array(np.shape(image)[0:2])
 
         #---------------------------------------------------------#
@@ -166,7 +176,7 @@ class YOLO(object):
                 batch_detections = batch_detections[0].cpu().numpy()
             except:
                 flag = False
-                return image, flag
+                return image, flag, top, bottom, left, right
             
             #---------------------------------------------------------#
             #   对预测框进行得分筛选
@@ -211,12 +221,17 @@ class YOLO(object):
             right = min(np.shape(image)[1], np.floor(right + 0.5).astype('int32'))
             # 得到目标物品的底边中心点坐标并写入txt文件中
             center = (left+right)/2
-            if center < 240 or center > 400:
+            all_top.append(top)
+            all_left.append(left)
+            all_bottom.append(bottom)
+            all_right.append(right)
+            if center < 200 or center > 440:
                 flag = False
-            else:
-                file = open('../txt/coordinate.txt', 'w+')
-                file.write(str(top)+","+str(bottom)+","+str(left)+","+str(right))
-                file.close()
+            # else:
+                # for num in all_top:
+                    # file = open('C:/Users/14790/Desktop/coordinate.txt', 'w+')
+                    # file.write(str(top)+","+str(bottom)+","+str(left)+","+str(right))
+                    # file.close()
 
             # 画框框
             label = '{} {:.2f}'.format(predicted_class, score)
@@ -239,5 +254,5 @@ class YOLO(object):
                 fill=self.colors[self.class_names.index(predicted_class)])
             draw.text(text_origin, str(label,'UTF-8'), fill=(0, 0, 0), font=font)
             del draw
-        return image , flag
+        return image , flag, all_top, all_bottom, all_left, all_right
 

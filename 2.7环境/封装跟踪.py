@@ -56,7 +56,7 @@ def take_image(resolution, colorSpace, fps):
     time.sleep(1)
 
 
-# 作用:展示图片(注意路径)
+# 作用:展示图片
 def show_image():
     image_result = cv2.imread('../img/image_result.jpg')
     if image_result is not None:
@@ -80,7 +80,7 @@ def ranging():
     left = float(coordinate[2])
     right = float(coordinate[3])
     center = (left + right) / 2
-    print (top,bottom,left,right,center)
+    print (top, bottom, left, right, center)
     # 检测到物品下中心点的x坐标
     cxnum = (left + right) / 2
     # 检测到物品下中心点的y坐标
@@ -114,7 +114,7 @@ def ranging():
 #       turn: 控制两个不同python环境能循的标志变量
 def initialization():
     port = 9559  # crf 机器人端口
-    robot_ip = "192.168.3.223"  # crf 机器人IP
+    robot_ip = "192.168.3.77"  # crf 机器人IP
 
     # 代理naoAPI
     cameraProxy = ALProxy("ALVideoDevice", robot_ip, port)
@@ -126,11 +126,11 @@ def initialization():
     write_txt('../txt/turn_py2.7.txt', "0")
     write_txt('../txt/turn_py3.6.txt', "1")
 
-    #防止有stop文件没清理
-    clean_txt('../txt/stop.txt')
-
     # 初始化机器人头角度
     write_txt('../txt/x_angle.txt', "-1")
+
+    # 防止有stop文件没清理
+    clean_txt('../txt/stop.txt')
 
     # 初始化机器人姿势
     motionProxy.wakeUp()
@@ -166,6 +166,7 @@ if __name__ == "__main__":
 
     # 初始化第一轮次跟踪的标志变量
     track_turn = 1
+    run = 1
 
     while True:
         # 等待py3.6完成指令
@@ -176,9 +177,10 @@ if __name__ == "__main__":
             turn_read = int(turn_read)
             # print turn_read, turn
         if turn == turn_read and turn % 2 == 1:
+            print("第" + str(run) + "轮")
+            run += 1
             # time.sleep(2)
             turn = turn + 2
-            write_txt('../txt/turn_py2.7.txt', str(turn - 1))
 
             read_x_angle = read_txt('../txt/x_angle.txt')
             x_angle = float(read_x_angle)
@@ -187,17 +189,19 @@ if __name__ == "__main__":
             # 故先跳过第一轮检测
             if turn == 3:
                 turn_head(x_angle)
-
                 take_image(resolution, colorSpace, fps)
+                write_txt('../txt/turn_py2.7.txt', str(turn - 1))
                 continue
             else:
                 sentence1 = read_txt('../txt/stop.txt')
                 time.sleep(2)
                 sentence2 = read_txt('../txt/flag.txt')
+                time.sleep(2)
                 # 如果读取到停止指令，程序完成
                 if sentence1 == 'stop':
                     clean_txt('../txt/stop.txt')
                     motionProxy.rest()
+                    write_txt('../txt/turn_py2.7.txt', str(turn - 1))
                     break
                 else:
                     # 如果没检测到物品，转头0.25并进行下一轮拍照
@@ -221,6 +225,7 @@ if __name__ == "__main__":
                                 continue
                         take_image(resolution, colorSpace, fps)
                         clean_txt('../txt/flag.txt')
+                        write_txt('../txt/turn_py2.7.txt', str(turn - 1))
                         continue
                     else:
                         # 执行展示照片程序
@@ -238,8 +243,11 @@ if __name__ == "__main__":
                             if turn_read > 1:
                                 if Forward_Distance > 1.09:
                                     sayProxy.say("开始跟踪")
-                                    motionProxy.moveTo(Forward_Distance - 1.09, 0, 0)
+                                    motionProxy.moveTo((Forward_Distance - 1.09)/1.25, 0, 0)
 
+                                    # write_txt('C:/Users/14790/Desktop/x_angle.txt', "-1")
+                                    #
+                                    # turn_head(-1)
                                     turn_head(0)
 
                                     take_image(resolution, colorSpace, fps)
@@ -249,13 +257,16 @@ if __name__ == "__main__":
 
                                     clean_txt('../txt/coordinate.txt')
                                     # time.sleep(2)
-                                    file_name = '../img/image_result.jpg'
+                                    file_name = '../txt/image_result.jpg'
                                     # 删除目标检测结果图片，避免影响nao机器人程序执行
                                     if os.path.exists(file_name):
                                         os.remove(file_name)
                                         # time.sleep(2)
+                                    write_txt('../txt/turn_py2.7.txt', str(turn - 1))
                                 else:
                                     sayProxy.say("完成跟踪")
                                     write_txt('../txt/stop.txt', 'stop')
+                                    write_txt('../txt/turn_py2.7.txt', str(turn - 1))
                         except:
+                            write_txt('../txt/turn_py2.7.txt', str(turn - 1))
                             continue
