@@ -40,5 +40,6 @@ v2 版本：
 1. 解决了Nao机器人在同一张图片同时出现两个或以上瓶子报错的问题。
 2. 添加PaddleOCR算法，可以跟踪拥有特定'H'标识的水瓶（代码中可改）。
 3. 现在Nao机器人会转头寻找目标进行跟踪。
+4. v1版本在v1分支中查看
 ## License - 版权信息
 本项目证书为GPL-3.0 License，详见[GPL-3.0 License.md](https://github.com/leibusigo/nao-tracking-yolov4/blob/main/LICENSE)
